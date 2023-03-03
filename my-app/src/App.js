@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
-
+import logo from './spotifylogo.png'
+import './css/App.css'
 function App() {
   const authEndpoint = 'https://accounts.spotify.com/authorize';
   const clientId = "e9e84e9d5c72484a96a42e5bc7d42512";
@@ -50,18 +51,27 @@ function App() {
     window.localStorage.removeItem("token")
     window.location.reload(false)
   }
-  
+
   return (
-    <div className="App">
-     <h1>Spotify Project</h1>
-     <button type="login" onClick={handleLogin}>Login</button>
+    <div style = {{textAlign: "center", height: "100%"}}>
+      <div className="login-page">
+        <div className="banner">
+          <h1 className="banner-text">Spotify Music Quiz</h1>
+          <img alt="logo" src={logo} width="100" height="100"/> 
+        </div>
+          {user == null && 
+          <button className = "login-btn" type="login" onClick={handleLogin}>Login</button>
+          }
+      </div>
      
+
      { user !== null && 
-      <div>
-        <h2>test{user.display_name}</h2>
+      <div className='user-info'>
+        <img alt="profile" src={user.images[0].url}/>
+        <h2>{user.display_name}</h2>
         <h2>{user.id}</h2>
         <h3>Followers: {user.followers.total}</h3>
-        <button onClick={handleLogout}>Logout</button>
+        <button className = "logout-btn" onClick={handleLogout}>Logout</button>
       </div>
      }
      

@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One');
+
+#root {
+    height: 100%;
+}
+
+html {
+    height: 100%;
+    background-image: linear-gradient(#3D3D3D, #131111);
+    font-family: "Fredoka One";
+}
+
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.login-page {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -5%;
+}
+
+.banner {
+    display: flex;
+    align-items: center;
+}
+
+.banner-text {
+    font-size: 80px;
+    /* margin-bottom: 10px; */
+    color: #1ED760;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+.login-btn {
+    margin-top: 15px;
+    background-color: #1ED760;
+    text-align: center;
+    border: 2px solid #1D7F2D;
+    font-size: 25px;
+    font-family: "Fredoka One";
+    border-radius: 60px;
+    width: 200px;
+    height: 60px;
+    outline: transparent;
+    color: #000;
+}
+
+.login-btn:hover {
+    background-color: #000;
+    color: #1ED760;
+}
+
+.logout-btn{
+    margin-top: 15px;
+    background-color: #1ED760;
+    text-align: center;
+    border: 2px solid #1D7F2D;
+    font-size: 25px;
+    font-family: "Fredoka One";
+    border-radius: 60px;
+    width: 200px;
+    height: 60px;
+    outline: transparent;
+    color: #000;
+}
+
+.logout-btn:hover {
+    background-color: #000;
+    color: #1ED760;
+}
+
+.user-info{
+    font-size: 25px;
+    /* margin-bottom: 10px; */
+    color: #1ED760;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
