@@ -12,6 +12,10 @@ function App() {
 
   const [token, setToken] = useState('');
   const [user, setUser] = useState(null);
+  const [userPlaylists, setPlaylists] = useState([])
+  const [userChoice, setChoice] = useState('')
+
+  let spotifyApi = new SpotifyWebApi();
 
   //useEffect is called when page opens, this component strips the token from the hash
   useEffect(() => {
@@ -31,7 +35,6 @@ function App() {
   //this component grabs the user using spotify web api
   useEffect(() => {
     if (token) {
-      let spotifyApi = new SpotifyWebApi();
       spotifyApi.setAccessToken(token);
       spotifyApi.getMe().then((r) => {
         setUser(r);
@@ -51,6 +54,17 @@ function App() {
     window.localStorage.removeItem("token")
     window.location.reload(false)
   }
+  
+  //component to show playlist
+  const showUserPlaylist = () => {
+    spotifyApi.getUserPlaylists(user.id).then(response => {
+      setPlaylists(response.items)
+    })
+  }
+
+  const handlePlaylistSubmit = () => {
+    
+  }
 
   return (
     <div style = {{textAlign: "center", height: "100%"}}>
@@ -59,9 +73,25 @@ function App() {
           <h1 className="banner-text">Spotify Music Quiz</h1>
           <img alt="logo" src={logo} width="100" height="100"/> 
         </div>
-          {user == null && 
-          <button className = "login-btn" type="login" onClick={handleLogin}>Login</button>
-          }
+          
+          <div>
+          {userPlaylists.map((playlist, index) => (
+            <div>{playlist.name} </div>
+          ))}
+          </div>
+
+          <div>
+            <select value={userChoice} onChange={e=>setChoice(e.target.value)}> {
+              userPlaylists.map(opt=><option>{opt.name}</option>)
+            } 
+            </select>
+            <button onClick={() => {handlePlaylistSubmit()}}>Submit</button>
+          </div>
+
+
+        { user == null && 
+          <button className = "login-btn" type="login" onClick={() => {handleLogin()}} >Login</button>
+        }
       </div>
      
 
@@ -71,6 +101,7 @@ function App() {
         <h2>{user.display_name}</h2>
         <h2>{user.id}</h2>
         <h3>Followers: {user.followers.total}</h3>
+        <button onClick={() => {showUserPlaylist()}}>See playlists</button>
         <button className = "logout-btn" onClick={handleLogout}>Logout</button>
       </div>
      }
